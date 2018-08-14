@@ -89,7 +89,7 @@ class MaskRCNNBoxHead(head.Head):
     if num_predictions_per_location != 1:
       raise ValueError('Only num_predictions_per_location=1 is supported')
     spatial_averaged_roi_pooled_features = tf.reduce_mean(
-        features, [1, 2], keep_dims=True, name='AvgPool')
+        features, [1, 2], keepdims=True, name='AvgPool')
     flattened_roi_pooled_features = slim.flatten(
         spatial_averaged_roi_pooled_features)
     if self._use_dropout:
