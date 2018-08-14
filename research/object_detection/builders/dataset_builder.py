@@ -23,9 +23,11 @@ that wraps the build function.
 """
 import functools
 import tensorflow as tf
+from tf.data.Dataset import batch
 
 from object_detection.data_decoders import tf_example_decoder
 from object_detection.protos import input_reader_pb2
+
 
 
 def make_initializable_iterator(dataset):
@@ -142,8 +144,7 @@ def build(input_reader_config, batch_size=None, transform_input_data_fn=None):
         process_fn,
         num_parallel_calls=num_parallel_calls)
     if batch_size:
-      dataset = dataset.apply(
-          tf.contrib.data.batch_and_drop_remainder(batch_size))
+      dataset = dataset.apply(batch(batch_size, drop_remainder=True))
     dataset = dataset.prefetch(input_reader_config.num_prefetch_batches)
     return dataset
 
