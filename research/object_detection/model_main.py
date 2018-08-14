@@ -68,22 +68,30 @@ def main(unused_argv):
   train_steps = train_and_eval_dict['train_steps']
   eval_steps = train_and_eval_dict['eval_steps']
 
+  print('train_and_eval_dict: ' + train_and_eval_dict)
+
   if FLAGS.checkpoint_dir:
+    print('enter into "FLAGS.checkpoint_dir:"')
     if FLAGS.eval_training_data:
+      print('enter into "if FLAGS.eval_training_data:"')
       name = 'training_data'
       input_fn = eval_on_train_input_fn
     else:
+      print('enter into else of "if FLAGS.eval_training_data:"')
       name = 'validation_data'
       input_fn = eval_input_fn
     if FLAGS.run_once:
+      print('enter into "if FLAGS.run_once:"')
       estimator.evaluate(input_fn,
                          eval_steps,
                          checkpoint_path=tf.train.latest_checkpoint(
                              FLAGS.checkpoint_dir))
     else:
+      print('enter into else of "if FLAGS.run_once:"')
       model_lib.continuous_eval(estimator, FLAGS.model_dir, input_fn,
                                 eval_steps, train_steps, name)
   else:
+    print('enter into else of "FLAGS.checkpoint_dir:"')
     train_spec, eval_specs = model_lib.create_train_and_eval_specs(
         train_input_fn,
         eval_input_fn,
