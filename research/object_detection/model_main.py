@@ -68,7 +68,7 @@ def main(unused_argv):
   train_steps = train_and_eval_dict['train_steps']
   eval_steps = train_and_eval_dict['eval_steps']
 
-  print('train_and_eval_dict: ' + train_and_eval_dict)
+  print('train_and_eval_dict: ' + str(train_and_eval_dict))
 
   if FLAGS.checkpoint_dir:
     print('enter into "FLAGS.checkpoint_dir:"')
