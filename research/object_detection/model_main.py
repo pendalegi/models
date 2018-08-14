@@ -102,6 +102,7 @@ def main(unused_argv):
         eval_on_train_data=False)
 
     # Currently only a single Eval Spec is allowed.
+    tf.logging.set_verbosity(tf.logging.INFO)
     tf.estimator.train_and_evaluate(estimator, train_spec, eval_specs[0])
 
 
